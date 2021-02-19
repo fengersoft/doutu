@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>抖图</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/javascripts/jquery.js"></script>
+    <script src="/javascripts/jquery.touchSwipe.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+</head>
+
+<body>
+    <div id="appTitle">抖图</div>
+    <div id="imgArea">
+        <img id="selImg" src="images/test.jpg" />
+    </div>
+    <div id="divBottom">
+        <div id="btnOk" onClick="btnClick()">
+            换
+        </div>
+    </div>
+    <script>
+        $(function() {
+            $("#selImg").swipe({
+                //Generic swipe handler for all directions
+                swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
+                    $(this).text("You swiped " + direction);
+                    btnClick();
+
+                }
+            });
+        });
+
+        function btnClick() {
+            var url = "/getRandomFile";
+            $.get(url, function(data) {
+
+                $("#selImg").attr('src', data.ret);
+
+            });
+        }
+    </script>
+</body>
+
+</html>
